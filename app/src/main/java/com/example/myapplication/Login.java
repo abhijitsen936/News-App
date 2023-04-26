@@ -112,7 +112,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    // Override the onActivityResult method to handle the result of the Google Sign-In activity
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -120,11 +120,11 @@ public class Login extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign-In was successful, authenticate with Firebase
+
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
-                // Google Sign-In failed, update UI appropriately
+
                 Toast.makeText(Login.this, "Google sign in failed: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
             }
         }
@@ -138,12 +138,12 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+
                             Toast.makeText(Login.this, "Google sign in success", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(Login.this, MainActivity.class));
                             finish();
                         } else {
-                            // If sign in fails, display a message to the user.
+
                             Toast.makeText(Login.this, "Google sign in failed", Toast.LENGTH_SHORT).show();
                         }
                     }
